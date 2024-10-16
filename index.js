@@ -4,13 +4,19 @@ const program = new Command();
 
 // Налаштування командної програми
 program
-  .requiredOption('-i, --input <path>', 'Input file path')
+  .option('-i, --input <path>', 'Input file path')
   .option('-o, --output <path>', 'Output file path')
   .option('-d, --display', 'Display the result in console')
   .parse(process.argv);
 
 // Отримання аргументів
 const options = program.opts();
+
+// Перевірка, чи задано обов'язковий параметр input
+if (!options.input) {
+  console.error('Please, specify input file');
+  process.exit(1);
+}
 
 // Функція для читання файлу
 function readInputFile(filePath) {
