@@ -2,9 +2,9 @@ const fs = require('fs');
 const { Command } = require('commander');
 const program = new Command();
 program
-  .option('-i, --input <path>', 'Input file path') 
-  .option('-o, --output <path>', 'Output file path') 
-  .option('-d, --display', 'Display the result in console') 
+  .option('-i, --input <path>') 
+  .option('-o, --output <path>') 
+  .option('-d, --display') 
   .parse(process.argv);
 const options = program.opts();
 if (!options.input) {
@@ -16,11 +16,11 @@ function readInputFile(filePath) {
     console.error('Cannot find input file');
     process.exit(1);
   }
-  return fs.readFileSync(filePath, 'utf8');
+  return fs.readFileSync(filePath);
 }
 
 function writeOutputFile(outputPath, data) {
-  fs.writeFileSync(outputPath, data, 'utf8');
+  fs.writeFileSync(outputPath, data);
 }
 function processCurrencyRates(jsonData) {
   const data = JSON.parse(jsonData);
